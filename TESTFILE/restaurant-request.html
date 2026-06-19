@@ -1,0 +1,21 @@
+<h1>맛집 제보</h1>
+
+<input id="name" placeholder="음식점명">
+<input id="category" placeholder="분류">
+<input id="place_url" placeholder="카카오맵 URL">
+<input id="address" placeholder="주소">
+<select id="tag">
+  <option value="">태그 선택</option>
+  <option value="혼밥">혼밥</option>
+  <option value="데이트">데이트</option>
+  <option value="회식">회식</option>
+</select>
+
+<button id="requestBtn">제보하기</button>
+
+<p id="message"></p>
+
+<script
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2a7001d00bf7719cd3c7f7e495044de&libraries=services">
+</script>
+<script src="restaurant-request.js"></script>

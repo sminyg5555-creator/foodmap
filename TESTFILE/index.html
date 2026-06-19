@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>맛집지도</title>
+
+  <meta name="author" content="심세민" />
+  <meta name="description" content="맛집지도 서비스" />
+  <meta
+    name="keywords"
+    content="카테고리, 맛집지도, 유튜버맛집, 맛집유튜버"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav>
+    <div class="inner">
+      <div class="nav-container">
+        <h1 class="nav-title">맛집지도</h1>
+
+<div class="nav-buttons">
+  <button id="randomBtn" class="random-nav-btn">🎲 랜덤 추천</button>
+  <button id="openRequestModal" class="nav-contact">맛집 제보</button>
+</div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section id="category">
+
+      <div class="inner">
+
+        <div class="category-container">
+
+          <h2 class="category-title">
+            맛집지도 카테고리를 선택해보세요
+          </h2>
+
+       <div class="category-list">
+  <button id="allViewBtn" class="category-item all-view-btn">전체 보기</button>
+
+<button id="favoriteViewBtn" class="category-item favorite-view-btn">
+  ⭐ 즐겨찾기 보기 (0)
+</button>
+
+  <div class="category-sub-list">
+    <button id="korea" class="category-item">한식</button>
+    <button id="china" class="category-item">중식</button>
+    <button id="japan" class="category-item">일식</button>
+    <button id="america" class="category-item">양식</button>
+    <button id="cafe" class="category-item">카페,디저트</button>
+    <button id="Overseas" class="category-item">해외 음식</button>
+  </div>
+</div>
+
+          <!-- 검색창 -->
+
+          <div class="search-box">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="음식점명을 검색하세요"
+            />
+
+            <button id="searchBtn">
+              검색
+            </button>
+          </div>
+
+          <!-- 검색결과 -->
+
+
+
+          <div id="searchResultList"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 지도 -->
+
+    <div class="map-area inner">
+  <div id="map"></div>
+
+  <div class="tag-box">
+    <h3>🎯 상황별 추천</h3>
+
+    <div class="tag-list">
+      <button id="soloTag" class="tag-btn">혼밥</button>
+      <button id="dateTag" class="tag-btn">데이트</button>
+      <button id="groupTag" class="tag-btn">회식</button>
+    </div>
+  </div>
+</div>
+
+  </main>
+<div id="randomModal" class="random-modal">
+  <div class="random-content">
+    <h2>🎲 오늘의 추천 맛집</h2>
+    <div id="randomResult"></div>
+    <button id="closeRandomBtn">닫기</button>
+  </div>
+</div>
+
+<div id="requestModal" class="modal">
+  <div class="modal-content">
+    <h2>맛집 제보</h2>
+
+    <input id="requestName" placeholder="음식점명">
+    <select id="requestCategory">
+  <option value="">분류를 선택하세요</option>
+  <option value="한식">한식</option>
+  <option value="중식">중식</option>
+  <option value="일식">일식</option>
+  <option value="양식">양식</option>
+  <option value="카페">카페</option>
+  <option value="해외음식">해외음식</option>
+</select>
+    <input id="requestPlaceUrl" placeholder="카카오맵 URL">
+    <input id="requestAddress" placeholder="주소">
+
+    <button id="submitRequestBtn">제보하기</button>
+    <button id="closeRequestModal">닫기</button>
+
+    <p id="requestMessage"></p>
+  </div>
+</div>
+  <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2a7001d00bf7719cd3c7f7e495044de&libraries=services">
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

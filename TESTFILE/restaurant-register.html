@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>음식점 등록</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-container">
+
+    <div class="admin-header">
+      <h1>관리자 페이지</h1>
+      <button id="logoutBtn">로그아웃</button>
+    </div>
+
+    <section class="admin-section">
+      <h2 class="section-title">🟡 승인 대기 맛집</h2>
+      <div id="requestList"></div>
+    </section>
+
+    <section class="admin-section">
+      <h2 class="section-title">🟢 등록된 음식점</h2>
+      <div id="restaurantList"></div>
+    </section>
+
+    <section class="admin-section form-section">
+      <h2 class="section-title">➕ 음식점 직접 등록</h2>
+
+      <input id="name" placeholder="음식점명">
+      <select id="category">
+  <option value="">분류를 선택하세요</option>
+  <option value="한식">한식</option>
+  <option value="중식">중식</option>
+  <option value="일식">일식</option>
+  <option value="양식">양식</option>
+  <option value="카페">카페</option>
+  <option value="해외음식">해외음식</option>
+</select>
+      <input id="place_url" placeholder="카카오맵 URL">
+      <input id="address" placeholder="주소">
+
+      <button id="registerBtn">등록</button>
+      <p id="message"></p>
+    </section>
+
+  </div>
+
+  <div id="editModal" class="edit-modal">
+    <div class="edit-modal-content">
+      <h2>음식점 수정</h2>
+
+      <input id="editId" type="hidden">
+      <input id="editName" placeholder="음식점명">
+      <select id="editCategory">
+  <option value="">분류를 선택하세요</option>
+  <option value="한식">한식</option>
+  <option value="중식">중식</option>
+  <option value="일식">일식</option>
+  <option value="양식">양식</option>
+  <option value="카페">카페</option>
+  <option value="해외음식">해외음식</option>
+</select>
+      <input id="editPlaceUrl" placeholder="카카오맵 URL">
+      <input id="editAddress" placeholder="주소">
+      <select id="editTag">
+  <option value="">태그 선택</option>
+  <option value="혼밥">혼밥</option>
+  <option value="데이트">데이트</option>
+  <option value="회식">회식</option>
+</select>
+
+      <div class="edit-btn-area">
+        <button id="saveEditBtn">수정 완료</button>
+        <button id="closeEditBtn">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e2a7001d00bf7719cd3c7f7e495044de&libraries=services">
+  </script>
+
+  <script src="restaurant-register.js"></script>
+
+</body>
+</html>
