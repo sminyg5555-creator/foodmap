@@ -453,6 +453,8 @@ function searchRestaurant() {
   searchResultList.appendChild(div);
 });
 
+}
+
 const openRequestModal = document.getElementById("openRequestModal");
 const closeRequestModal = document.getElementById("closeRequestModal");
 const requestModal = document.getElementById("requestModal");
@@ -517,8 +519,9 @@ submitRequestBtn.addEventListener("click", async () => {
   }
 });
 
-document.getElementById("randomBtn").addEventListener("click", async () => {
+const randomBtn = document.getElementById("randomBtn");
 
+randomBtn.onclick = async () => {
   const response = await fetch("/restaurants");
   const restaurants = await response.json();
 
@@ -533,10 +536,7 @@ document.getElementById("randomBtn").addEventListener("click", async () => {
   let restaurant;
 
   const roulette = setInterval(() => {
-
-    const randomIndex =
-      Math.floor(Math.random() * restaurants.length);
-
+    const randomIndex = Math.floor(Math.random() * restaurants.length);
     restaurant = restaurants[randomIndex];
 
     document.getElementById("randomResult").innerHTML = `
@@ -547,25 +547,19 @@ document.getElementById("randomBtn").addEventListener("click", async () => {
     count++;
 
     if (count >= 25) {
-
       clearInterval(roulette);
 
-    document.getElementById("randomResult").innerHTML = `
-  <h3>${restaurant.name}</h3>
-
-  <p>${restaurant.category}</p>
-  <p>${restaurant.address}</p>
-
-  <a href="${restaurant.place_url}"
-     target="_blank">
-     카카오맵 이동
-  </a>
-`;
+      document.getElementById("randomResult").innerHTML = `
+        <h3>${restaurant.name}</h3>
+        <p>${restaurant.category}</p>
+        <p>${restaurant.address}</p>
+        <a href="${restaurant.place_url}" target="_blank">
+          카카오맵 이동
+        </a>
+      `;
     }
-
   }, 100);
-
-});
+};
 
 document.getElementById("closeRandomBtn").addEventListener("click", () => {
   document.getElementById("randomModal").style.display = "none";
@@ -612,4 +606,3 @@ favoriteViewBtn.addEventListener("click", () => {
 
   searchResultList.innerHTML = "";
 });
-}
