@@ -460,66 +460,18 @@ const closeRequestModal = document.getElementById("closeRequestModal");
 const requestModal = document.getElementById("requestModal");
 const submitRequestBtn = document.getElementById("submitRequestBtn");
 
-openRequestModal.addEventListener("click", () => {
+openRequestModal.onclick = () => {
   requestModal.style.display = "block";
-});
+};
 
-closeRequestModal.addEventListener("click", () => {
+closeRequestModal.onclick = () => {
   requestModal.style.display = "none";
-});
-
-submitRequestBtn.addEventListener("click", async () => {
-  const name = document.getElementById("requestName").value.trim();
-  const category = document.getElementById("requestCategory").value.trim();
-  const place_url = document.getElementById("requestPlaceUrl").value.trim();
-  const address = document.getElementById("requestAddress").value.trim();
-
-  if (!name || !category || !place_url || !address) {
-    alert("모든 항목을 입력해주세요.");
-    return;
-  }
-
-  const kakaoUrlPattern = /^https:\/\/place\.map\.kakao\.com\/[0-9]+$/;
-
-  if (!kakaoUrlPattern.test(place_url)) {
-    alert("카카오맵 URL 형식이 올바르지 않습니다.");
-    return;
-  }
-
-  if (!address.includes("시") || !address.includes("구")) {
-    alert("주소는 도로명 주소로 정확히 입력해주세요.");
-    return;
-  }
-
-  try {
-    const coords = await getCoordsByAddress(address);
-
-    const response = await fetch("/restaurant-requests", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        category,
-        place_url,
-        address,
-        latitude: coords.latitude,
-        longitude: coords.longitude
-      })
-    });
-
-    const result = await response.json();
-
-    alert(result.message);
-    requestModal.style.display = "none";
-
-  } catch (error) {
-    alert(error);
-  }
-});
+};
 
 const randomBtn = document.getElementById("randomBtn");
+const randomModal = document.getElementById("randomModal");
+const randomResult = document.getElementById("randomResult");
+const closeRandomBtn = document.getElementById("closeRandomBtn");
 
 randomBtn.onclick = async () => {
   const response = await fetch("/restaurants");
@@ -530,7 +482,7 @@ randomBtn.onclick = async () => {
     return;
   }
 
-  document.getElementById("randomModal").style.display = "block";
+  randomModal.style.display = "block";
 
   let count = 0;
   let restaurant;
@@ -539,7 +491,7 @@ randomBtn.onclick = async () => {
     const randomIndex = Math.floor(Math.random() * restaurants.length);
     restaurant = restaurants[randomIndex];
 
-    document.getElementById("randomResult").innerHTML = `
+    randomResult.innerHTML = `
       <h2>🎲 룰렛 돌리는 중...</h2>
       <h3>${restaurant.name}</h3>
     `;
@@ -549,7 +501,7 @@ randomBtn.onclick = async () => {
     if (count >= 25) {
       clearInterval(roulette);
 
-      document.getElementById("randomResult").innerHTML = `
+      randomResult.innerHTML = `
         <h3>${restaurant.name}</h3>
         <p>${restaurant.category}</p>
         <p>${restaurant.address}</p>
@@ -561,48 +513,42 @@ randomBtn.onclick = async () => {
   }, 100);
 };
 
-document.getElementById("closeRandomBtn").addEventListener("click", () => {
-  document.getElementById("randomModal").style.display = "none";
-});
+closeRandomBtn.onclick = () => {
+  randomModal.style.display = "none";
+};
 
-soloTag.addEventListener("click", () => {
+soloTag.onclick = () => {
   tagFilter("혼밥");
-});
+};
 
-dateTag.addEventListener("click", () => {
+dateTag.onclick = () => {
   tagFilter("데이트");
-});
+};
 
-groupTag.addEventListener("click", () => {
+groupTag.onclick = () => {
   tagFilter("회식");
-});
+};
 
 const allViewBtn = document.getElementById("allViewBtn");
 
-allViewBtn.addEventListener("click", () => {
+allViewBtn.onclick = () => {
   closeMarker();
   closeInfowindow();
-
   restaurantMarkerList = [];
-
   setMap(dataSet);
-
   searchResultList.innerHTML = "";
-});
+};
 
 const favoriteViewBtn = document.getElementById("favoriteViewBtn");
 
-favoriteViewBtn.addEventListener("click", () => {
+favoriteViewBtn.onclick = () => {
   const favoriteData = dataSet.filter(data => {
     return favoriteList.includes(data.id);
   });
 
   closeMarker();
   closeInfowindow();
-
   restaurantMarkerList = [];
-
   setMap(favoriteData);
-
   searchResultList.innerHTML = "";
-});
+};
