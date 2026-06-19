@@ -76,7 +76,7 @@ const categoryImageMap = {
 };
 
 async function loadData() {
-  const response = await fetch("http://localhost:3000/restaurants");
+  const response = await fetch("/restaurants");
   const data = await response.json();
 
   dataSet = data.map(item => ({
@@ -492,7 +492,7 @@ submitRequestBtn.addEventListener("click", async () => {
   try {
     const coords = await getCoordsByAddress(address);
 
-    const response = await fetch("http://localhost:3000/restaurant-requests", {
+    const response = await fetch("/restaurant-requests", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -519,7 +519,7 @@ submitRequestBtn.addEventListener("click", async () => {
 
 document.getElementById("randomBtn").addEventListener("click", async () => {
 
-  const response = await fetch("http://localhost:3000/restaurants");
+  const response = await fetch("/restaurants");
   const restaurants = await response.json();
 
   if (restaurants.length === 0) {

@@ -36,7 +36,7 @@ registerBtn.addEventListener("click", async () => {
   try {
     const coords = await getCoordsByAddress(address);
 
-    const response = await fetch("http://localhost:3000/restaurants", {
+    const response = await fetch("/restaurants", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ registerBtn.addEventListener("click", async () => {
 });
 
 async function loadRestaurants() {
-  const response = await fetch("http://localhost:3000/restaurants");
+  const response = await fetch("/restaurants");
   const restaurants = await response.json();
 
   const restaurantList = document.getElementById("restaurantList");
@@ -107,7 +107,7 @@ async function deleteRestaurant(id) {
 
   if (!confirmDelete) return;
 
-  const response = await fetch(`http://localhost:3000/restaurants/${id}`, {
+  const response = await fetch(`/restaurants/${id}`, {
     method: "DELETE",
   });
 
@@ -122,7 +122,7 @@ async function deleteRestaurant(id) {
 }
 
 async function loadRequests() {
-  const response = await fetch("http://localhost:3000/restaurant-requests");
+  const response = await fetch("/restaurant-requests");
   const requests = await response.json();
 
   const requestList = document.getElementById("requestList");
@@ -149,7 +149,7 @@ async function approveRequest(id) {
   if (!confirmApprove) return;
 
   const response = await fetch(
-    `http://localhost:3000/restaurant-requests/${id}/approve`,
+    `/restaurant-requests/${id}/approve`,
     {
       method: "POST",
     }
@@ -173,7 +173,7 @@ async function rejectRequest(id) {
   if (!confirmReject) return;
 
   const response = await fetch(
-    `http://localhost:3000/restaurant-requests/${id}/reject`,
+    `/restaurant-requests/${id}/reject`,
     {
       method: "POST",
     }
@@ -190,7 +190,7 @@ async function rejectRequest(id) {
 }
 
 async function editRestaurant(id) {
-  const response = await fetch("http://localhost:3000/restaurants");
+  const response = await fetch("/restaurants");
   const restaurants = await response.json();
 
   const restaurant = restaurants.find((item) => item.id === id);
@@ -225,7 +225,7 @@ saveEditBtn.addEventListener("click", async () => {
   try {
     const coords = await getCoordsByAddress(address);
 
-    const response = await fetch(`http://localhost:3000/restaurants/${id}`, {
+    const response = await fetch(`/restaurants/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
