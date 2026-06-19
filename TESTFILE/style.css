@@ -589,3 +589,20 @@ main {
     min-height: 400px;
   }
 }
+
+nav,
+#category,
+.category-container,
+.category-list,
+.search-box,
+.tag-box,
+.random-modal,
+.modal {
+  position: relative;
+  z-index: 10;
+}
+
+#map {
+  position: relative;
+  z-index: 1;
+}
