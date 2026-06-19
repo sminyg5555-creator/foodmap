@@ -7,6 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
@@ -318,6 +324,8 @@ app.put("/restaurants/:id", (req, res) => {
   );
 });
 
-app.listen(3000, () => {
-    console.log("서버 실행중");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("서버 실행중");
 });
