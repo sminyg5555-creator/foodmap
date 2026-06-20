@@ -1,5 +1,6 @@
 
 let isFavoriteView = false;
+let isFavoriteView = false;
 let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
 
 function saveFavoriteList() {
@@ -9,21 +10,6 @@ function saveFavoriteList() {
 function isFavorite(id) {
   return favoriteList.includes(id);
 }
-
-function toggleFavorite(id) {
-  if (isFavorite(id)) {
-    favoriteList = favoriteList.filter(favId => favId !== id);
-  } else {
-    favoriteList.push(id);
-  }
-
-saveFavoriteList();
-updateFavoriteCount();
-
-closeMarker();
-closeInfowindow();
-
-restaurantMarkerList = [];
 
 function toggleFavorite(id) {
   if (isFavorite(id)) {
@@ -49,7 +35,7 @@ function toggleFavorite(id) {
     setMap(dataSet);
   }
 }
-}
+
 
 function updateFavoriteCount() {
   const favoriteViewBtn =
@@ -608,8 +594,6 @@ groupTag.onclick = () => {
 const allViewBtn = document.getElementById("allViewBtn");
 
 allViewBtn.onclick = () => {
-  isFavoriteView = false;
-
   closeMarker();
   closeInfowindow();
   restaurantMarkerList = [];
@@ -620,8 +604,6 @@ allViewBtn.onclick = () => {
 const favoriteViewBtn = document.getElementById("favoriteViewBtn");
 
 favoriteViewBtn.onclick = () => {
-  isFavoriteView = true;
-
   const favoriteData = dataSet.filter(data => {
     return favoriteList.includes(data.id);
   });
