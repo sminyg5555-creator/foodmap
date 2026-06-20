@@ -1,5 +1,3 @@
-
-let isFavoriteView = false;
 let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
 
 function saveFavoriteList() {
@@ -19,20 +17,7 @@ function toggleFavorite(id) {
 
   saveFavoriteList();
   updateFavoriteCount();
-
-  closeMarker();
   closeInfowindow();
-  restaurantMarkerList = [];
-
-  if (isFavoriteView) {
-    const favoriteData = dataSet.filter(data =>
-      favoriteList.includes(data.id)
-    );
-
-    setMap(favoriteData);
-  } else {
-    setMap(dataSet);
-  }
 }
 
 
