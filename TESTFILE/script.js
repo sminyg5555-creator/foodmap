@@ -1,5 +1,5 @@
 
-
+let isFavoriteView = false;
 let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
 
 function saveFavoriteList() {
@@ -39,11 +39,15 @@ function toggleFavorite(id) {
   closeInfowindow();
   restaurantMarkerList = [];
 
-  const favoriteData = dataSet.filter(data => {
-    return favoriteList.includes(data.id);
-  });
+  if (isFavoriteView) {
+    const favoriteData = dataSet.filter(data =>
+      favoriteList.includes(data.id)
+    );
 
-  setMap(favoriteData);
+    setMap(favoriteData);
+  } else {
+    setMap(dataSet);
+  }
 }
 }
 
@@ -604,6 +608,8 @@ groupTag.onclick = () => {
 const allViewBtn = document.getElementById("allViewBtn");
 
 allViewBtn.onclick = () => {
+  isFavoriteView = false;
+
   closeMarker();
   closeInfowindow();
   restaurantMarkerList = [];
@@ -614,6 +620,8 @@ allViewBtn.onclick = () => {
 const favoriteViewBtn = document.getElementById("favoriteViewBtn");
 
 favoriteViewBtn.onclick = () => {
+  isFavoriteView = true;
+
   const favoriteData = dataSet.filter(data => {
     return favoriteList.includes(data.id);
   });
