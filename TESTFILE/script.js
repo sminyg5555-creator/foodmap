@@ -460,6 +460,59 @@ const closeRequestModal = document.getElementById("closeRequestModal");
 const requestModal = document.getElementById("requestModal");
 const submitRequestBtn = document.getElementById("submitRequestBtn");
 
+submitRequestBtn.addEventListener("click", async () => {
+  const name = document.getElementById("requestName").value.trim();
+  const category = document.getElementById("requestCategory").value;
+  const place_url = document.getElementById("requestPlaceUrl").value.trim();
+  const address = document.getElementById("requestAddress").value.trim();
+  const requestMessage = document.getElementById("requestMessage");
+
+  if (!name || !category || !place_url || !address) {
+    alert("모든 항목을 입력해주세요.");
+    return;
+  }
+
+  if (!address.includes("시") && !address.includes("구")) {
+    alert("주소를 정확히 입력해주세요.");
+    return;
+  }
+
+  try {
+    const coords = await getCoordsByAddress(address);
+
+    const response = await fetch("/restaurant-requests", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        category,
+        place_url,
+        address,
+        latitude: coords.latitude,
+        longitude: coords.longitude
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert("제보 등록 실패");
+      return;
+    }
+
+    requestMessage.textContent = "제보가 완료되었습니다. 관리자 승인 후 등록됩니다.";
+
+    document.getElementById("requestName").value = "";
+    document.getElementById("requestCategory").value = "";
+    document.getElementById("requestPlaceUrl").value = "";
+    document.getElementById("requestAddress").value = "";
+  } catch (err) {
+    alert(err);
+  }
+});
+
 openRequestModal.onclick = () => {
   requestModal.style.display = "block";
 };
