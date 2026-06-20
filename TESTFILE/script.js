@@ -25,7 +25,26 @@ closeInfowindow();
 
 restaurantMarkerList = [];
 
-setMap(dataSet);
+function toggleFavorite(id) {
+  if (isFavorite(id)) {
+    favoriteList = favoriteList.filter(favId => favId !== id);
+  } else {
+    favoriteList.push(id);
+  }
+
+  saveFavoriteList();
+  updateFavoriteCount();
+
+  closeMarker();
+  closeInfowindow();
+  restaurantMarkerList = [];
+
+  const favoriteData = dataSet.filter(data => {
+    return favoriteList.includes(data.id);
+  });
+
+  setMap(favoriteData);
+}
 }
 
 function updateFavoriteCount() {
