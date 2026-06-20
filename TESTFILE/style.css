@@ -595,9 +595,7 @@ nav,
 .category-container,
 .category-list,
 .search-box,
-.tag-box,
-.random-modal,
-.modal {
+.tag-box {
   position: relative;
   z-index: 10;
 }
@@ -605,4 +603,22 @@ nav,
 #map {
   position: relative;
   z-index: 1;
+}
+
+.random-modal,
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+}
+
+.random-content,
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
