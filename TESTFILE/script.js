@@ -552,3 +552,8 @@ favoriteViewBtn.onclick = () => {
   setMap(favoriteData);
   searchResultList.innerHTML = "";
 };
+
+console.log("randomBtn:", randomBtn);
+console.log("openRequestModal:", openRequestModal);
+console.log("randomModal:", randomModal);
+console.log("requestModal:", requestModal);
