@@ -1,6 +1,5 @@
 
 let isFavoriteView = false;
-let isFavoriteView = false;
 let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
 
 function saveFavoriteList() {
