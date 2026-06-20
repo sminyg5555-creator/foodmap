@@ -134,11 +134,11 @@ app.delete("/restaurants/:id", (req, res) => {
 app.post("/restaurant-requests", (req, res) => {
   const { name, category, place_url, address, latitude, longitude } = req.body;
 
-  const sql = `
-    INSERT INTO restaurant_requests
-    (name, category, place_url, address, latitude, longitude)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
+ const sql = `
+  INSERT INTO restaurant_requests
+  (name, category, place_url, address, latitude, longitude, status)
+  VALUES (?, ?, ?, ?, ?, ?, 'pending')
+`;
 
   db.query(
     sql,
